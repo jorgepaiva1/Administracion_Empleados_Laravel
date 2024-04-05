@@ -28,12 +28,14 @@ class ImpersonateController extends Controller
 
     public function start(Request $request){
 
+        $id = $request->input('user');
+
         if(session()->get('impersonated_by') == null){
             session()->put('original_impersonated_by', auth()->id());
         }
         session()->put('impersonated_by', auth()->id());
 
-        Auth::loginUsingId(login($request));
+        Auth::loginUsingId($id); //loginUsingId(login($request));
         session()->put('is_impersonated',true);
         return redirect('/');
     }
@@ -44,14 +46,13 @@ class ImpersonateController extends Controller
             session()->pull('is_impersonated');
         }
 
-
         Auth::loginUsingId(session()->pull('original_impersonated_by'));
         session()->pull('impersonated_by');
         return redirect('/');
     }
-
+/*
     public function selectUser(Request $request){
-        $userId = $request->input('user_code');
+        $userId = $request->input('user');
         if(!$userId){
             return redirect()->back();
         }
@@ -60,4 +61,5 @@ class ImpersonateController extends Controller
         session()->put('is_impersonated',true);
         return redirect('/');
     }
+*/
 }

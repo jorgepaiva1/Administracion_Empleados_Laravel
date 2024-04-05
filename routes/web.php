@@ -42,8 +42,8 @@ Auth::routes();
 Route::get('/empleado', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::post('/impersonate/start', [ImpersonateController::class, 'start'])->name('start');
-Route::post('/impersonate/stop', [ImpersonateController::class, 'stop'])->name('salir_usuario');
+Route::post('/impersonate-start', [ImpersonateController::class, 'start'])->name('start');
+Route::get('/impersonate-stop', [ImpersonateController::class, 'stop'])->name('salir_usuario');
 Route::get('/usuarios', [ImpersonateController::class, 'index'])->middleware('auth')->name('lista_usuario');
 Route::post('/select_user', [ImpersonateController::class, 'selectUser'])->name('select_user');
 Route::get('/nombres',[ImpersonateController::class, 'index2'])->middleware('auth')->name('select_name');

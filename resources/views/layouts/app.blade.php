@@ -24,22 +24,34 @@
                 </ul>
 
                 <ul class="navbar-nav ml-auto">
-                    <div >
-                        <form action=" {{ route('start') }}" method="POST" style="margin-top: 5px;">
-                        @csrf
-                        <div class="input-group">
-                            <select class="js-example-basic-single" name="empleado">
-                                <option value=""> Empleados </option>
-                                @foreach(\App\Models\User::all() as $usuario)
-                                    @if($usuario->is_employeer == 1)
-                                        <option value="{{$usuario->id}}" @if(current_user()->id == $usuario->id) selected @endif> {{$usuario->name }} </option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                    </form>
-                    </div>
+                @if(!session('is_impersonated'))
+                    <div>
+                        <form action=" {{ route('start') }}" id="selectUser" method="POST" style="margin-top: 5px;">
+                            @csrf
+                            <div class="input-group">
+                                <select class="js-example-basic-single" name="user">
+                                    <option value=""> Empleados </option>
 
+                                    @foreach(\App\Models\User::all() as $usuario)
+                                        @if($usuario->is_employeer == 1)
+                                            <option @if(current_user()->id == $usuario->id) selected @endif value="{{$usuario->id}}"> {{$usuario->name }} </option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </form>
+                        <button type="submit" form="selectUser" class="btn btn-default btn-sm" style="margin-left: 50px">
+                            Elegir
+                            <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                @endif
+
+                    @if(session('is_impersonated'))
+                        <a href="{{route('salir_usuario')}}" class="btn btn-outline-info">
+                            Volver al original
+                        </a>
+                    @endif
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                             <img src="https://assets.infyom.com/logo/blue_logo_150x150.png"
@@ -104,7 +116,8 @@
 <script>
     $(function () {
         $('.js-example-basic-single').select2({
-            theme: 'bootstrap-5'
+            theme: 'bootstrap-5',
+            width: 'auto'
         });
     });
 </script>
