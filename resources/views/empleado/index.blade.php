@@ -75,6 +75,7 @@
             rowReorder: true,
             responsive: true,
             pageLength: 2,
+            autoWidth: false,
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             }

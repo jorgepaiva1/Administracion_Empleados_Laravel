@@ -23,10 +23,10 @@
                     </li>
                 </ul>
 
-                <ul class="navbar-nav ml-auto">
-                @if(!session('is_impersonated'))
+                <ul class="navbar-nav ml-auto" style="height: 38px">
+                @if( !session('is_impersonated') and !is_employeer() )
                     <div>
-                        <form action=" {{ route('start') }}" id="selectUser" method="POST" style="margin-top: 5px;">
+                        <form action=" {{ route('start') }}" id="selectUser" method="POST" >
                             @csrf
                             <div class="input-group">
                                 <select class="js-example-basic-single" name="user">
@@ -40,12 +40,12 @@
                                 </select>
                             </div>
                         </form>
-                        <button type="submit" form="selectUser" class="btn btn-default btn-sm" style="margin-left: 50px">
+                    </div>
+                        <button type="submit" form="selectUser" class="btn btn-outline-info" style="height: 38px; margin-left: 7px">
                             Elegir
                             <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
                         </button>
-                    </div>
-                @endif
+                    @endif
 
                     @if(session('is_impersonated'))
                         <a href="{{route('salir_usuario')}}" class="btn btn-outline-info">
@@ -117,7 +117,9 @@
     $(function () {
         $('.js-example-basic-single').select2({
             theme: 'bootstrap-5',
-            width: 'auto'
+            responsive: true,
+            width: 'auto',
+            height: '38px'
         });
     });
 </script>
