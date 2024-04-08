@@ -48,7 +48,7 @@
         new DataTable('#nombres',{
             rowReorder: true,
             responsive: true,
-            pageLength: 2,
+            pageLength: 3,
             autoWidth: false,
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
