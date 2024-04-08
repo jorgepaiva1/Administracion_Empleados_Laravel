@@ -17,9 +17,8 @@ class ImpersonateController extends Controller
             return redirect('/');
     }
 
-    public function index2(){
+    public function index2(){ //nombres
         if(Auth::user()->is_employeer ==1) {
-            //$usuarios = User::all();
             $datos = User::all();
             return view('nombres.index',  ['datos' =>$datos]);
         }
