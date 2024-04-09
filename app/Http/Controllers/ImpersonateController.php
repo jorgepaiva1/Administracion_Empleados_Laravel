@@ -17,10 +17,10 @@ class ImpersonateController extends Controller
             return redirect('/');
     }
 
-    public function index2(){ //nombres
+    public function index2(){ //usuarios
         if(Auth::user()->is_employeer ==1) {
             $datos = User::all();
-            return view('nombres.index',  ['datos' =>$datos]);
+            return view('users.index',  ['datos' =>$datos]);
         }
         return redirect('/');
     }
