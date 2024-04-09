@@ -17,11 +17,11 @@ class ImpersonateController extends Controller
             return redirect('/');
     }
 
-<<<<<<< HEAD
-    public function index2(){ //usuarios
-=======
+
+
+
     public function index2(){ //nombres
->>>>>>> a9e5e0948e82e3c8ce95005cbcba975a71d1eb56
+
         if(Auth::user()->is_employeer ==1) {
             $datos = User::all();
             return view('users.index',  ['datos' =>$datos]);
@@ -53,7 +53,7 @@ class ImpersonateController extends Controller
         session()->pull('impersonated_by');
         return redirect('/');
     }
-/*
+
     public function selectUser(Request $request){
         $userId = $request->input('user');
         if(!$userId){
@@ -64,5 +64,5 @@ class ImpersonateController extends Controller
         session()->put('is_impersonated',true);
         return redirect('/');
     }
-*/
+
 }
